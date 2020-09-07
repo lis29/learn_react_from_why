@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table {
+      border: 1px solid #eee;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid #eee;
+      padding: 10px 16px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ccc;
+    }
+
+    .count {
+      margin: 0 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app"></div>
+  <script src="../react/react.development.js"></script>
+  <script src="../react/react-dom.development.js"></script>
+  <script src="../react/babel.min.js"></script>
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super();
+        this.state = {
+          books: [
+            {
+              id: 1,
+              name: '《算法导论》',
+              date: '2006-9',
+              price: 85.00,
+              count: 2
+            },
+            {
+              id: 2,
+              name: '《UNIX编程艺术》',
+              date: '2006-2',
+              price: 59.00,
+              count: 1
+            },
+            {
+              id: 3,
+              name: '《编程珠玑》',
+              date: '2008-10',
+              price: 39.00,
+              count: 1
+            },
+            {
+              id: 4,
+              name: '《代码大全》',
+              date: '2006-3',
+              price: 128.00,
+              count: 1
+            }
+          ]
+        };
+      }
+
+      formatePrice = (price) => {
+        if (typeof price !== 'number') {
+          price = Number(price) || 0.0;
+        }
+        return `￥${price.toFixed(2)}`
+      }
+
+      increment = (index, count) => {
+        const books = this.state.books
+        books[index].count = books[index].count + count
+        this.setState({
+          books
+        })
+      }
+
+      totalPrice() {
+        const total = this.state.books.reduce((pre, cur) => {
+          return pre + cur.count * cur.price
+        }, 0)
+        console.log(total)
+        return this.formatePrice(total)
+      }
+
+      removeBook = (index) => {
+        // let books = this.state.books
+        // books.splice(index, 1)
+        // this.setState({
+        //   books
+        // })
+
+        const books = this.state.books.filter((item, indey) => {
+          return item.id != index
+        })
+        this.setState({
+          books
+        })
+      }
+
+      render() {
+        return (
+          <div>
+            {this.state.books.length > 0 ? this.bookListCom() : this.emptyTipCom()}
+          </div>
+        )
+      }
+
+      bookListCom = () => {
+        const books = this.state.books;
+        const ele = (
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>名字</th>
+                  <th>时间</th>
+                  <th>价格</th>
+                  <th>数量</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  books.map((item, index) => {
+                    return (
+                      <tr key={item.id}>
+                        <td>{index}</td>
+                        <td>{item.name}</td>
+                        <td>{item.date}</td>
+                        <td>{this.formatePrice(item.price)}</td>
+                        <td>
+                          <button disabled={item.count <= 1} onClick={e => { this.increment(index, -1) }}>-</button>
+                          <span className="count">{item.count}</span>
+                          <button onClick={e => { this.increment(index, 1) }}>+</button>
+                        </td>
+                        <td>
+                          <button onClick={e => this.removeBook(item.id)}>删除</button>
+                        </td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </table>
+            <h3>工价格：{this.totalPrice()}</h3>
+          </div>
+        );
+
+        return ele;
+      }
+
+      emptyTipCom = () => {
+        const ele = (
+          <div>
+            <h2>暂时没有图书</h2>
+          </div>
+        );
+        return ele;
+      }
+    }
+
+
+
+    ReactDOM.render(<App />, document.getElementById("app"));
+  </script>
+</body>
+
+</html>

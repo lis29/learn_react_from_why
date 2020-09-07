@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      color: rgba(0.2, 0.4, 0.6, 0.8);
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <div style="font-size: large; background-color: red;"></div>
+  <script src="../react/react.development.js"></script>
+  <script src="../react/react-dom.development.js"></script>
+  <script src="../react/babel.min.js"></script>
+
+  <script type="text/babel">
+    // 获取指定size的image
+    function getImageSize(url, size) {
+      return `${url}?param=${size}x${size}`
+    }
+
+    // 随机颜色
+    function randomColor() {
+      return `rgba(${parseInt((Math.random() * 255))}, ${parseInt((Math.random() * 255))}, ${parseInt((Math.random() * 255))}, ${Math.random()})`
+    }
+
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          title: '标题',
+          imgUrl: 'http://p2.music.126.net/L8IDEWMk_6vyT0asSkPgXw==/109951163990535633.jpg',
+          link: 'https://wwww.baidu.com',
+          activeClass: false,
+          fontSize: 20,
+          backgroundColor: 'white'
+        }
+      }
+
+      render() {
+        const { title, imgUrl, link, activeClass, fontSize, backgroundColor } = this.state
+        return (
+          <div>
+            {/*普通属性绑定*/}
+            <h3 title={title}>三级标题</h3>
+            <img src={getImageSize(imgUrl, 80)} /> <br />
+            <a href={link}>百度</a>
+            <hr />
+            {/*className绑定*/}
+            <div className={"box wrapper" + (activeClass ? " active" : "")}>
+              <h3>绑定class</h3>
+              <button onClick={e => { this.setState({ activeClass: !this.state.activeClass }) }}>{!activeClass ? "激活" : "普通"}</button>
+            </div>
+            <hr />
+            {/*style绑定*/}
+            <div style={{ backgroundColor: 'yellow', fontSize: '30px', width: 150, height: 100 }}>绑定style样式</div>
+            <div style={{ backgroundColor: backgroundColor, fontSize: fontSize + 'px' }}>
+              <h3>动态绑定样式</h3>
+              <button onClick={e => { this.setState({ fontSize: this.state.fontSize + 1 }) }}>字体放大</button>
+              <button onClick={e => { this.setState({ backgroundColor: 'red' }) }}>背景-红色</button>
+              <button onClick={e => { this.setState({ backgroundColor: randomColor() }) }}>随机颜色值</button>
+            </div>
+          </div>
+        )
+      }
+    }
+
+
+    ReactDOM.render(<App />, document.getElementById("app"));
+  </script>
+</body>
+
+</html>

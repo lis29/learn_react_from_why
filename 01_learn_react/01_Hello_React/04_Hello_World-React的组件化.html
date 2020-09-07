@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="header"></div>
+  <div id="app">adfasdfasdf</div>
+  <div id="footer"></div>
+
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!-- type类型必须写成text/babel，否则babel不会去解析jsx语法 -->
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super();
+        this.state = {
+          msg: 'Hello World'
+        }
+      }
+      render() {
+        return (
+          <div>
+            <h2>{this.state.msg}</h2>
+            <button onClick={this.btnClicked.bind(this)}>改变文本</button>
+          </div>
+        )
+      }
+
+      btnClicked = () => {
+        // 这种方式不会触发render函数，不会重新渲染页面
+        // this.state.msg = "Hello React!" 
+        // 必须使用setState这种方式
+        this.setState({
+          msg: "Hello React!"
+        })
+      }
+    }
+    ReactDOM.render(<App />, document.getElementById('app'));
+  </script>
+
+
+</body>
+
+</html>

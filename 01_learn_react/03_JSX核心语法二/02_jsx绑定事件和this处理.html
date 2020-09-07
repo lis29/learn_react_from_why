@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <div style="font-size: large; background-color: red;"></div>
+  <script src="../react/react.development.js"></script>
+  <script src="../react/react-dom.development.js"></script>
+  <script src="../react/babel.min.js"></script>
+
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          msg: "你好~",
+          count: 10
+        }
+
+        this.btnClick = this.btnClick.bind(this)
+      }
+
+
+      btnClick() {
+        console.log(this.state.msg)
+      }
+
+      increment = () => {
+        this.setState({
+          count: this.state.count + 1
+        })
+      }
+
+      decrement = (e, num) => {
+        let n = num ? num : 1
+        this.setState({
+          count: this.state.count - n
+        })
+      }
+      render() {
+        return (
+          <div>
+            {/* 方案1，通过bind的方式绑定this */}
+            <button onClick={this.btnClick}>按钮1</button>
+            <button onClick={this.btnClick}>按钮2</button>
+            <button onClick={this.btnClick}>按钮3</button>
+            <hr />
+            {/* 方案2，通过箭头函数的形式 */}
+            <h3>count : {this.state.count}</h3>
+            <button onClick={this.increment}>加1</button>
+            <button onClick={this.decrement}>减1</button>
+            {/* 方案3，直接指定一个箭头函数，在其中执行需要调用的方法 */}
+            <button onClick={e => this.decrement(e, 5)}>减5</button>
+          </div>
+        )
+      }
+    }
+
+
+    ReactDOM.render(<App />, document.getElementById("app"));
+  </script>
+</body>
+
+</html>
