@@ -1,0 +1,24 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.nav-bar {
+  display: flex;
+}
+
+.nav-bar-item {
+  text-align: center;
+  height: 44px;
+  line-height: 44px;
+}
+
+.left-item, .right-item {
+  width: 100px;
+  background-color: antiquewhite;
+}
+
+.center-item {
+  flex: 1;
+  background-color: chartreuse;
+}
+
