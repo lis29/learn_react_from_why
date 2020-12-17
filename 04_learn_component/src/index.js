@@ -1,23 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// import App from './00-补充/00-refs'
+// import App from './00-补充/01_为 DOM 元素添加 ref'
+// import App from './00-补充/02_为 class 组件添加 Ref'
+// import App from './00-补充/03_Refs 与函数组件'
+// import App from './00-补充/03_函数组件内部使用refs'
+// import App from './00-补充/04_回调 Refs'
+// import App from './00-补充/05_forwardRef转发ref'
+import App from './00-补充/06_forwardRef在高阶组件中的应用'
 // import App from './04_组件通信案例/App';
 // import './04_组件通信案例/style.css';
 
 // import App from './05_react实现插槽/App'
 // import './05_React实现slot/style.css';
 
-import App from './06_跨组件通信/02_跨组件通信-context'
+// import App from './06_跨组件通信/02_跨组件通信-context'
 // import App from './06_跨组件的通信/02_跨组件通信-context';
 // import App from './06_跨组件的通信/03_跨组件通信-context函数';
 // import App from './06_跨组件的通信/04_跨组件通信-多个context';
 
+// import App from './07_setState的使用/00_何时以及为什么 setState() 会批量执行？'
 // import App from './07_setState的使用/01_为什么使用setState';
 // import App from './07_setState的使用/02_setState是异步更新';
 // import App from './07_setState的使用/03_setState是同步更新';
 // import App from './07_setState的使用/04_setState数据的合并';
 // import App from './07_setState的使用/05_setState本身的合并';
 
+// import App from './08_React性能优化/00_对象和数组'
 // import App from './08_React性能优化/01_列表中keys的作用';
 // import App from './08_React性能优化/02_组件嵌套的render调用';
 // import App from './08_React性能优化/03_shouldComponentUpdate';
@@ -35,6 +45,7 @@ import App from './06_跨组件通信/02_跨组件通信-context'
 
 // import App from './11_高阶组件的使用/01_高阶组件的定义方式';
 // import App from './11_高阶组件的使用/02_高阶组件应用-增强props';
+// import App from './11_高阶组件的使用/03_高阶组件应用-增强props-默认'
 // import App from './11_高阶组件的使用/04_高阶组件应用-增强props-改进';
 // import App from './11_高阶组件的使用/05_高阶组件应用-登录鉴权操作';
 // import App from './11_高阶组件的使用/06_高阶组件应用-生命周期劫持-默认';
@@ -47,3 +58,17 @@ import App from './06_跨组件通信/02_跨组件通信-context'
 // import App from './12_组件内容补充/04_strictMode的使用';
 
 ReactDOM.render(<App name="why" />, document.getElementById('root'));
+
+
+
+// const state = { counter: 1 };
+// const newState = Object.assign(
+//   state,
+//   { counter: state.counter + 1 },
+//   { counter: state.counter + 1 },
+//   { counter: state.counter + 1 },
+//   { counter: state.counter + 1 },
+//   { counter: state.counter + 1 },
+//   { counter: state.counter + 1 });
+// console.log(state); // {counter: 2}
+// console.log(newState); // {counter: 2}
