@@ -1,12 +1,11 @@
-import Home from './Components/Home'
-// import About from './Components/About'
-import About from './Components/About1'
-
+import Home from './pages/home'
+// import About from './pages/about'
+import About from './pages/about1'
 
 function App() {
-  console.log(About);
   return (
     <div>
+      App
       <Home />
       <hr />
       <About />
